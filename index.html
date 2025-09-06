@@ -1,313 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salão Elegance — Beleza & Estilo</title>
-  <meta name="theme-color" content="#111214" />
-  <style>
-    :root{
-      --bg:#0e0f12;
-      --bg-soft:#16181d;
-      --card:#1b1f26;
-      --text:#e6e8eb;
-      --muted:#a8b0b9;
-      --accent:#9b87f5;
-      --accent-2:#22d3ee;
-      --danger:#f43f5e;
-      --border: #283041;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family: Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block;border-radius:10px}
-    .container{width:min(1100px,92%);margin:0 auto}
-    header{
-      position:sticky; top:0; z-index:50;
-      background:linear-gradient(180deg, rgba(14,15,18,.95), rgba(14,15,18,.75));
-      backdrop-filter:saturate(1.2) blur(8px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:14px 0;
-    }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.5px}
-    .brand .logo{
-      width:38px; height:38px; border-radius:10px;
-      background: radial-gradient(120% 140% at 20% 20%, var(--accent) 0%, #6d59d9 35%, transparent 36%) , linear-gradient(180deg,#1d1f27, #0f1115);
-      border:1px solid #2b3150; box-shadow: inset 0 0 30px rgba(155,135,245,.25);
-    }
-    .navlinks{display:flex; gap:18px; flex-wrap:wrap}
-    .navlinks a{
-      padding:8px 12px; border-radius:10px; color:var(--muted);
-    }
-    .navlinks a:hover{color:var(--text); background:var(--bg-soft)}
-    .cta{
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#0b0d12; padding:10px 14px; border-radius:12px; font-weight:700;
-      box-shadow: var(--shadow);
-    }
-    .hero{
-      display:grid; grid-template-columns: 1.1fr .9fr; gap:26px; align-items:center;
-      padding:34px 0 10px;
-    }
-    .hero-card{
-      background:linear-gradient(180deg, #13151a, #0e1014);
-      border:1px solid var(--border); border-radius:var(--radius); padding:24px;
-      box-shadow: var(--shadow);
-    }
-    .hero h1{margin:.2rem 0 .6rem; font-size: clamp(24px, 4.2vw, 42px); line-height:1.08}
-    .hero p{margin:.6rem 0 1.2rem; color:var(--muted)}
-    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .badge{padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); background:#12141a}
-    .panel{
-      background:linear-gradient(180deg, #141821, #0f1218);
-      border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow: var(--shadow);
-    }
-    .grid{
-      display:grid; gap:16px;
-      grid-template-columns: repeat(12, 1fr);
-    }
-    .col-12{grid-column: span 12}
-    .col-6{grid-column: span 6}
-    .col-4{grid-column: span 4}
-    .section{padding:26px 0}
-    .section h2{font-size: clamp(20px, 3vw, 28px); margin:0 0 12px}
-    .muted{color:var(--muted)}
-    .card{
-      background:linear-gradient(180deg,#14161c,#0f1116);
-      border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow: var(--shadow);
-      display:flex; flex-direction:column;
-    }
-    .card-body{padding:14px}
-    .price{font-weight:800}
-    .btn{
-      background:#1c2230; color:#d7dbe2; padding:10px 12px; border:1px solid var(--border); border-radius:12px; cursor:pointer; transition:.2s;
-    }
-    .btn:hover{filter:brightness(1.1)}
-    .btn.primary{
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#0c0e13; font-weight:800; border-color:transparent;
-    }
-    .btn.ghost{background:#12141a}
-    .btn.danger{background: #2a1217; border-color:#3a1921; color:#ffb3c1}
-    .qty{
-      display:flex; align-items:center; gap:8px;
-    }
-    .qty button{width:28px;height:28px;border-radius:8px}
-    .cart{
-      position:sticky; top:74px;
-    }
-    .cart-items{display:flex; flex-direction:column; gap:10px; margin:12px 0}
-    .cart-item{
-      display:flex; align-items:center; gap:10px; justify-content:space-between; background:#12141a; border:1px solid var(--border); border-radius:12px; padding:10px;
-    }
-    .cart-summary{display:flex; align-items:center; justify-content:space-between; margin-top:8px; font-weight:700}
-    form .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    form .row-1{display:grid; grid-template-columns:1fr; gap:10px}
-    label{font-size:.9rem; color:var(--muted)}
-    input, select, textarea{
-      width:100%; padding:10px 12px; border-radius:10px; background:#0f1116; color:var(--text);
-      border:1px solid var(--border); outline:none;
-    }
-    textarea{min-height:84px; resize:vertical}
-    .gallery{display:grid; grid-template-columns:repeat(2, 1fr); gap:10px}
-    .slots{display:flex; flex-wrap:wrap; gap:8px}
-    .slot{
-      padding:8px 10px; border-radius:10px; border:1px solid var(--border);
-      background:#141722; color:#cfd5df; cursor:pointer; transition:.15s;
-    }
-    .slot[disabled]{opacity:.45; cursor:not-allowed; text-decoration:line-through}
-    .slot.selected{outline:2px solid var(--accent-2); background:#0f1b24}
-    .notice{font-size:.9rem; color:var(--muted)}
-    footer{
-      border-top:1px solid var(--border); margin-top:26px; padding:18px 0; color:var(--muted)
-    }
-    @media (max-width: 900px){
-      .hero{grid-template-columns: 1fr}
-      .col-6{grid-column: span 12}
-      .col-4{grid-column: span 12}
-      .cart{position:relative; top:auto}
-      .gallery{grid-template-columns:1fr}
-      .nav{gap:8px}
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Salão Elegance</title>
+<style>
+  :root{--bg:#0e0f12;--text:#e6e8eb;--soft:#16181d;--card:#1b1f26;--border:#2a2f3a}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  header,footer{padding:12px 16px;background:var(--soft)}
+  main{padding:16px}
+  h2{margin:0 0 10px}
+  section{margin:18px 0}
+  .card{background:linear-gradient(180deg,#151922,#101319);border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0}
+  .price{font-weight:700}
+  .cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0;padding:10px;border:1px solid var(--border);border-radius:10px;background:#12141a}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+  img{max-width:100%;display:block;border-radius:10px}
+  label{display:block;margin:10px 0 6px;color:#cdd3db}
+  input,select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#0f1116;color:var(--text);outline:none}
+  button{cursor:pointer;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:#1b2330;color:#dbe3ee}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo"></div>
-        <div>Salão Elegance</div>
-      </div>
-      <nav class="navlinks">
-        <a href="#servicos">Serviços</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#carrinho">Carrinho</a>
-        <a href="#agendamento" class="cta">Agendar</a>
-      </nav>
+
+<header>
+  <h1>Salão Elegance</h1>
+</header>
+
+<main>
+  <!-- Galeria -->
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&w=900&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=900&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=900&auto=format&fit=crop" alt="">
     </div>
-  </header>
+  </section>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <h1>Beleza em alto nível, com conforto e praticidade</h1>
-        <p>Escolha serviços, finalize com entrega de produtos e garanta seu horário no nosso agendamento online.</p>
-        <div class="badges">
-          <span class="badge">Tema escuro</span>
-          <span class="badge">Responsivo</span>
-          <span class="badge">Carrinho & Entrega</span>
-          <span class="badge">Agendamento online</span>
-        </div>
+  <!-- Serviços -->
+  <section id="servicos">
+    <h2>Serviços</h2>
+    <div id="servicosGrid"></div>
+  </section>
+
+  <!-- Carrinho -->
+  <section id="carrinho">
+    <h2>Carrinho</h2>
+    <div id="cartItems"></div>
+    <div>Total: <span id="cartTotal">R$ 0,00</span></div>
+  </section>
+
+  <!-- Agendamento -->
+  <section id="agendamento">
+    <h2>Agendamento online</h2>
+    <div class="grid">
+      <div>
+        <label>Data</label>
+        <input type="date" id="dataAgendamento" required />
       </div>
-      <div class="panel">
-        <div class="notice">Horário de funcionamento: Seg–Sáb, 09:00–18:00. Endereço: Av. Exemplo, 123 — Imperatriz/MA</div>
+      <div>
+        <label>Horário</label>
+        <select id="horarioAgendamento" required>
+          <option value="">— Selecione —</option>
+          <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="13:00">13:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+        </select>
       </div>
-    </section>
-
-    <section id="servicos" class="section">
-      <h2>Serviços e valores</h2>
-      <p class="muted">Toque em “Adicionar” para incluir no carrinho.</p>
-      <div id="servicosGrid" class="grid"></div>
-    </section>
-
-    <section id="galeria" class="section">
-      <h2>Galeria</h2>
-      <p class="muted">Adicione suas melhores fotos: antes e depois, ambiente, equipe.</p>
-      <div class="gallery" id="gallery">
-        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop" alt="Cabelo 1">
-        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&w=1200&auto=format&fit=crop" alt="Cabelo 2">
-        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1200&auto=format&fit=crop" alt="Unhas 1">
-        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1200&auto=format&fit=crop" alt="Barbearia 1">
+      <div>
+        <label>Seu nome</label>
+        <input id="nomeCliente" placeholder="Nome do cliente" required />
       </div>
-    </section>
-
-    <section id="carrinho" class="section">
-      <div class="grid">
-        <div class="col-8 col-12">
-          <h2>Informações de entrega</h2>
-          <form id="entregaForm" class="panel">
-            <div class="row">
-              <div>
-                <label>Nome completo</label>
-                <input name="nome" required placeholder="Seu nome" />
-              </div>
-              <div>
-                <label>Telefone (WhatsApp)</label>
-                <input name="telefone" required inputmode="tel" placeholder="(99) 9 9999-9999" />
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <label>Endereço</label>
-                <input name="endereco" required placeholder="Rua/Av, número" />
-              </div>
-              <div>
-                <label>Bairro</label>
-                <input name="bairro" required placeholder="Bairro" />
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <label>Cidade</label>
-                <input name="cidade" required value="Imperatriz" />
-              </div>
-              <div>
-                <label>CEP</label>
-                <input name="cep" inputmode="numeric" placeholder="65900-000" />
-              </div>
-            </div>
-            <div class="row-1">
-              <div>
-                <label>Complemento / Referência</label>
-                <input name="complemento" placeholder="Casa, apto, ponto de referência..." />
-              </div>
-              <div>
-                <label>Observações</label>
-                <textarea name="observacoes" placeholder="Instruções de entrega ou preferências"></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <button type="button" class="btn ghost" id="copiarResumo">Copiar resumo do pedido</button>
-              </div>
-              <div style="text-align:right">
-                <button type="submit" class="btn primary">Finalizar pedido</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-4 col-12">
-          <div class="cart panel">
-            <h2>Seu carrinho</h2>
-            <div class="cart-items" id="cartItems"></div>
-            <div class="cart-summary">
-              <div>Total</div>
-              <div id="cartTotal">R$ 0,00</div>
-            </div>
-            <p class="notice">Adicione serviços para finalizar o pedido com entrega de produtos (se aplicável).</p>
-          </div>
-        </div>
+      <div>
+        <label>Telefone (WhatsApp)</label>
+        <input id="telCliente" placeholder="(99) 9 9999-9999" inputmode="tel" required />
       </div>
-    </section>
-
-    <section id="agendamento" class="section">
-      <h2>Agendamento online</h2>
-      <div class="panel">
-        <div class="row">
-          <div>
-            <label>Data</label>
-            <input type="date" id="dataAgendamento" required />
-          </div>
-          <div>
-            <label>Serviço (opcional)</label>
-            <select id="servicoAgendamento">
-              <option value="">— Selecionar —</option>
-            </select>
-          </div>
-        </div>
-        <div style="margin-top:14px">
-          <label>Horários disponíveis</label>
-          <div id="slots" class="slots" style="margin-top:8px"></div>
-        </div>
-        <div class="row" style="margin-top:14px">
-          <div>
-            <label>Seu nome</label>
-            <input id="nomeCliente" placeholder="Nome do cliente" required />
-          </div>
-          <div>
-            <label>Telefone</label>
-            <input id="telCliente" placeholder="(99) 9 9999-9999" inputmode="tel" required />
-          </div>
-        </div>
-        <div style="margin-top:14px; display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap">
-          <div class="notice">Ao confirmar, o horário escolhido ficará indisponível para outros clientes (bloqueio global via Firestore).</div>
-          <button class="btn primary" id="confirmarAgendamento">Confirmar agendamento</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      © <span id="year"></span> Salão Elegance — Todos os direitos reservados
     </div>
-  </footer>
+    <div style="margin-top:14px">
+      <button id="confirmarAgendamento">Confirmar agendamento</button>
+    </div>
+  </section>
+</main>
 
-  <!-- Firebase SDK (namespaced) -->
-  <script type="module">
-  // Import the functions you need from the SDKs you need
+<footer>© <span id="year"></span> Salão Elegance</footer>
+
+<!-- Firebase modular -->
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import {
+    getFirestore, doc, onSnapshot, runTransaction,
+    collection, addDoc, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  // Configuração do Firebase (seus dados)
   const firebaseConfig = {
     apiKey: "AIzaSyBHBcJHtU_o8tjsJCSoCsO665M3N72mF8g",
     authDomain: "meusiteaki2025.firebaseapp.com",
@@ -318,348 +111,194 @@
     measurementId: "G-KD8EDDRLWZ"
   };
 
-  // Initialize Firebase
+  // Inicialização
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
 
-    // ====== Configuração de serviços e horários ======
-    const SERVICOS = [
-      { id:'corte', nome:'Corte', preco: 30.00, img:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop' },
-      { id:'lavagem', nome:'Lavagem de Cabelo', preco: 50.00, img:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&w=1200&auto=format&fit=crop' },
-      { id:'alongamento', nome:'Alongamento', preco: 20.50, img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1200&auto=format&fit=crop' },
-      { id:'selagem', nome:'Selagem', preco: 200.00, img:'https://images.unsplash.com/photo-1532710093739-9470acff878f?q=80&w=1200&auto=format&fit=crop' }
-    ];
+  // Helpers
+  const fmtBRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  const $ = s => document.querySelector(s);
 
-    const HORARIO = {
-      abertura: '09:00',
-      fechamento: '18:00',
-      intervaloMinutos: 30,
-      diasAtivos: [1,2,3,4,5,6] // Seg-Sáb
-    };
+  // Serviços
+  const SERVICOS = [
+    { id:'corte', nome:'Corte', preco:30.00 },
+    { id:'lavagem', nome:'Lavagem de Cabelo', preco:50.00 },
+    { id:'alongamento', nome:'Alongamento', preco:20.50 },
+    { id:'selagem', nome:'Selagem', preco:200.00 }
+  ];
+  const servicosGrid = $('#servicosGrid');
+  function renderServicos(){
+    servicosGrid.innerHTML = '';
+    SERVICOS.forEach(s=>{
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div><strong>${s.nome}</strong></div>
+          <div class="price">${fmtBRL(s.preco)}</div>
+        </div>
+        <div style="margin-top:8px">
+          <button data-add="${s.id}">Adicionar</button>
+        </div>
+      `;
+      servicosGrid.appendChild(div);
+    });
+  }
 
-    // ====== Utilidades & storage local do carrinho ======
-    const fmtBRL = (v) => v.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
-    const $ = (sel) => document.querySelector(sel);
-    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+  // Carrinho
+  let cart = [];
+  const cartItemsEl = $('#cartItems');
+  const cartTotalEl = $('#cartTotal');
 
-    const storage = {
-      get(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) ?? fallback }catch{ return fallback } },
-      set(key, val){ localStorage.setItem(key, JSON.stringify(val)) }
-    };
+  function renderCart(){
+    cartItemsEl.innerHTML = '';
+    cart.forEach(i=>{
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <div>${i.nome} x${i.qtd} — ${fmtBRL(i.preco*i.qtd)}</div>
+        <div style="display:flex;gap:6px">
+          <button data-qty="${i.id}|-1">–</button>
+          <button data-qty="${i.id}|1">+</button>
+          <button data-del="${i.id}">Remover</button>
+        </div>
+      `;
+      cartItemsEl.appendChild(row);
+    });
+    const total = cart.reduce((t,i)=>t+i.preco*i.qtd,0);
+    cartTotalEl.textContent = fmtBRL(total);
+  }
+  function addToCart(id){
+    const item = cart.find(x=>x.id===id);
+    if(item) item.qtd++;
+    else{
+      const s = SERVICOS.find(x=>x.id===id);
+      cart.push({ id:s.id, nome:s.nome, preco:s.preco, qtd:1 });
+    }
+    renderCart();
+  }
+  function changeQty(id, delta){
+    const it = cart.find(x=>x.id===id);
+    if(!it) return;
+    it.qtd += delta;
+    if(it.qtd<=0) cart = cart.filter(x=>x.id!==id);
+    renderCart();
+  }
+  function removeFromCart(id){
+    cart = cart.filter(x=>x.id!==id);
+    renderCart();
+  }
 
-    // ====== Render de serviços ======
-    const servicosGrid = document.getElementById('servicosGrid');
-    function renderServicos(){
-      const frag = document.createDocumentFragment();
-      SERVICOS.forEach(s => {
-        const card = document.createElement('div');
-        card.className = 'card col-4 col-6 col-12';
-        card.innerHTML = `
-          <img src="${s.img}" alt="${s.nome}">
-          <div class="card-body">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px">
-              <div>
-                <div style="font-weight:700">${s.nome}</div>
-                <div class="muted" style="font-size:.92rem; margin-top:2px">Serviço profissional</div>
-              </div>
-              <div class="price">${fmtBRL(s.preco)}</div>
-            </div>
-            <div style="margin-top:10px; display:flex; gap:8px">
-              <button class="btn" data-add="${s.id}">Adicionar</button>
-              <button class="btn ghost" data-agendar="${s.id}">Agendar</button>
-            </div>
-          </div>
-        `;
-        frag.appendChild(card);
+  // Delegação global de cliques (serviços/carrinho)
+  document.addEventListener('click', (e)=>{
+    const add = e.target.closest('[data-add]');
+    if(add){ addToCart(add.getAttribute('data-add')); }
+    const del = e.target.closest('[data-del]');
+    if(del){ removeFromCart(del.getAttribute('data-del')); }
+    const qty = e.target.closest('[data-qty]');
+    if(qty){
+      const [id,delta] = qty.getAttribute('data-qty').split('|');
+      changeQty(id, Number(delta));
+    }
+  });
+
+  // Agendamento
+  const dataAgendamento = $('#dataAgendamento');
+  const horarioAgendamento = $('#horarioAgendamento');
+  const nomeCliente = $('#nomeCliente');
+  const telCliente = $('#telCliente');
+  const btnConfirmar = $('#confirmarAgendamento');
+
+  let unsubscribe = null;
+
+  // Ouve horários reservados da data e desabilita no select
+  function ouvirReservasDia(ds){
+    if(unsubscribe) unsubscribe();
+    unsubscribe = onSnapshot(doc(db,'reservas',ds),(snap)=>{
+      const indisponiveis = snap.exists() ? (snap.data().horarios || []) : [];
+      // reset
+      Array.from(horarioAgendamento.options).forEach(opt=>{
+        if(opt.value) opt.disabled = false;
       });
-      servicosGrid.appendChild(frag);
-    }
-
-    // ====== Carrinho ======
-    let cart = storage.get('cart', []);
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartTotalEl = document.getElementById('cartTotal');
-
-    function saveCart(){ storage.set('cart', cart); renderCart(); }
-    function addToCart(id){
-      const item = cart.find(i=>i.id===id);
-      if(item){ item.qtd += 1; }
-      else{
-        const s = SERVICOS.find(x=>x.id===id);
-        cart.push({ id, nome:s.nome, preco:s.preco, qtd:1 });
-      }
-      saveCart();
-    }
-    function removeFromCart(id){
-      cart = cart.filter(i=>i.id!==id);
-      saveCart();
-    }
-    function changeQty(id, delta){
-      const item = cart.find(i=>i.id===id);
-      if(!item) return;
-      item.qtd += delta;
-      if(item.qtd<=0) removeFromCart(id);
-      else saveCart();
-    }
-    function cartTotal(){
-      return cart.reduce((acc,i)=> acc + i.preco*i.qtd, 0);
-    }
-    function renderCart(){
-      cartItemsEl.innerHTML = '';
-      cart.forEach(i=>{
-        const row = document.createElement('div');
-        row.className = 'cart-item';
-        row.innerHTML = `
-          <div style="display:flex; align-items:center; gap:10px">
-            <div style="font-weight:700">${i.nome}</div>
-            <div class="muted" style="font-size:.92rem">${fmtBRL(i.preco)}</div>
-          </div>
-          <div class="qty">
-            <button class="btn" data-qty="${i.id}|-1">–</button>
-            <div>${i.qtd}</div>
-            <button class="btn" data-qty="${i.id}|1">+</button>
-            <button class="btn danger" data-del="${i.id}">Remover</button>
-          </div>
-        `;
-        cartItemsEl.appendChild(row);
+      // bloqueia reservados
+      indisponiveis.forEach(h=>{
+        const opt = Array.from(horarioAgendamento.options).find(o=>o.value===h);
+        if(opt) opt.disabled = true;
       });
-      cartTotalEl.textContent = fmtBRL(cartTotal());
-    }
-
-    // ====== Entrega / Finalização ======
-    const entregaForm = document.getElementById('entregaForm');
-    const copiarResumoBtn = document.getElementById('copiarResumo');
-
-    function resumoPedido(){
-      const total = fmtBRL(cartTotal());
-      const itens = cart.map(i => `- ${i.nome} x${i.qtd} — ${fmtBRL(i.preco*i.qtd)}`).join('\n');
-      return `Pedido Salão Elegance
-Itens:
-${itens || '(vazio)'}
-Total: ${total}`;
-    }
-
-    copiarResumoBtn.addEventListener('click', async ()=>{
-      const texto = resumoPedido();
-      try{
-        await navigator.clipboard.writeText(texto);
-        alert('Resumo copiado!');
-      }catch{
-        prompt('Copie o resumo:', texto);
+      // se o selecionado ficou inválido, limpa
+      if(horarioAgendamento.value && horarioAgendamento.selectedOptions[0]?.disabled){
+        horarioAgendamento.value = '';
       }
     });
+  }
 
-    entregaForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      if(cart.length===0){ alert('Seu carrinho está vazio. Adicione serviços.'); return; }
-      const data = Object.fromEntries(new FormData(entregaForm).entries());
-      const mensagem = `${resumoPedido()}
+  // Confirmação: bloqueia horário + registra agendamento + WhatsApp
+  btnConfirmar.addEventListener('click', async ()=>{
+    const ds = dataAgendamento.value;
+    const hora = horarioAgendamento.value;
+    const nome = nomeCliente.value.trim();
+    const telefone = telCliente.value.trim();
 
-Cliente: ${data.nome}
-Telefone: ${data.telefone}
-Endereço: ${data.endereco}, ${data.bairro||'-'}, ${data.cidade||'-'} — CEP ${data.cep||'-'}
-Complemento: ${data.complemento||'-'}
-Obs: ${data.observacoes||'-'}
-`;
-      console.log(mensagem);
-      alert('Pedido finalizado! Entraremos em contato para confirmar.');
-      cart = [];
-      saveCart();
-      entregaForm.reset();
-    });
-
-    // ====== Agendamento com Firestore ======
-    const dataAgendamento = document.getElementById('dataAgendamento');
-    const servicoAgendamento = document.getElementById('servicoAgendamento');
-    const slotsEl = document.getElementById('slots');
-    const btnConfirmarAgendamento = document.getElementById('confirmarAgendamento');
-    const nomeCliente = document.getElementById('nomeCliente');
-    const telCliente = document.getElementById('telCliente');
-
-    function popularServicosAgendamento(){
-      SERVICOS.forEach(s=>{
-        const opt = document.createElement('option');
-        opt.value = s.id; opt.textContent = `${s.nome} — ${fmtBRL(s.preco)}`;
-        servicoAgendamento.appendChild(opt);
-      });
+    if(!ds || !hora || !nome || !telefone){
+      alert('Preencha todos os campos');
+      return;
     }
 
-    function parseTime(t){ const [h,m] = t.split(':').map(Number); return {h,m}; }
-    function toMinutes({h,m}){ return h*60+m; }
-    function fromMinutes(M){ const h = String(Math.floor(M/60)).padStart(2,'0'); const m = String(M%60).padStart(2,'0'); return `${h}:${m}`; }
-
-    function gerarSlots(){
-      const slots = [];
-      const start = toMinutes(parseTime(HORARIO.abertura));
-      const end = toMinutes(parseTime(HORARIO.fechamento));
-      for(let t=start; t<end; t+=HORARIO.intervaloMinutos){
-        slots.push(fromMinutes(t));
-      }
-      return slots;
-    }
-
-    function diaSemana(dateStr){
-      const d = new Date(dateStr + 'T00:00:00');
-      return d.getDay(); // 0=Dom
-    }
-
-    let slotSelecionado = null;
-    let unsubscribe = null;
-
-    function unsubscribeReservas(){
-      if(typeof unsubscribe === 'function'){ unsubscribe(); unsubscribe = null; }
-    }
-
-    function renderSlots(indisponiveis){
-      slotsEl.innerHTML = '';
-      slotSelecionado = null;
-
-      const ds = dataAgendamento.value;
-      if(!ds){ slotsEl.innerHTML = `<span class="notice">Selecione uma data.</span>`; return; }
-
-      const dow = diaSemana(ds);
-      if(!HORARIO.diasAtivos.includes(dow)){
-        slotsEl.innerHTML = `<span class="notice">Data fora do horário de funcionamento.</span>`;
-        return;
-      }
-
-      const agora = new Date();
-      const hoje = new Date();
-      const isHoje = new Date(ds+'T00:00:00').toDateString() === hoje.toDateString();
-      const indisSet = new Set(indisponiveis || []);
-
-      gerarSlots().forEach(hora=>{
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'slot';
-        btn.textContent = hora;
-
-        let disabled = indisSet.has(hora);
-        if(isHoje){
-          const [hh,mm] = hora.split(':').map(Number);
-          const dt = new Date();
-          dt.setHours(hh,mm,0,0);
-          if(dt <= agora) disabled = true;
-        }
-
-        if(disabled) btn.setAttribute('disabled','');
-        btn.addEventListener('click', ()=>{
-          if(btn.hasAttribute('disabled')) return;
-          $$('.slot').forEach(s=>s.classList.remove('selected'));
-          btn.classList.add('selected');
-          slotSelecionado = hora;
-        });
-
-        slotsEl.appendChild(btn);
-      });
-    }
-
-    async function confirmarReservaFirestore(ds, hora, cliente, telefone, servicoId){
-      const ref = db.collection('reservas').doc(ds);
-      await db.runTransaction(async (t)=>{
-        const snap = await t.get(ref);
-        let horarios = snap.exists ? (snap.data().horarios || []) : [];
-        if(horarios.includes(hora)){
-          throw new Error('Horário já reservado');
-        }
+    try {
+      // 1) Bloquear horário na data (reservas/{YYYY-MM-DD}.horarios[])
+      const refReserva = doc(db,'reservas',ds);
+      await runTransaction(db, async (t)=>{
+        const snap = await t.get(refReserva);
+        let horarios = snap.exists() ? (snap.data().horarios || []) : [];
+        if(horarios.includes(hora)) throw new Error('Horário já reservado');
         horarios.push(hora);
-        horarios = Array.from(new Set(horarios)).sort();
-        t.set(ref, { horarios }, { merge: true });
+        t.set(refReserva, { horarios }, { merge:true });
       });
 
-      await db.collection('agendamentos').add({
+      // 2) Registrar agendamento (agendamentos)
+      await addDoc(collection(db,'agendamentos'), {
         data: ds,
-        hora,
-        cliente,
-        telefone,
-        servicoId: servicoId || null,
-        criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+        hora: hora,
+        nome: nome,
+        telefone: telefone,
+        status: 'Pendente',
+        criadoEm: serverTimestamp()
       });
-    }
 
-    function ouvirReservasDia(ds){
-      unsubscribeReservas();
-      unsubscribe = db.collection('reservas').doc(ds).onSnapshot(doc=>{
-        const indisponiveis = doc.exists ? (doc.data().horarios || []) : [];
-        renderSlots(indisponiveis);
-      }, (err)=>{
-        console.error('Erro ao ouvir reservas:', err);
-        renderSlots([]);
-      });
+      // 3) WhatsApp
+      const numeroLimpo = telefone.replace(/\D/g,'');
+      const msg = `Olá ${nome}, seu agendamento foi confirmado para ${ds} às ${hora}.`;
+      window.open(`https://wa.me/55${numeroLimpo}?text=${encodeURIComponent(msg)}`,'_blank');
+
+      alert('Agendamento confirmado!');
+      horarioAgendamento.value = '';
+    } catch(e) {
+      alert('Não foi possível reservar: ' + (e?.message || e));
     }
+  });
+
+  // Inicialização de UI
+  (function init(){
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderServicos();
+    renderCart();
+
+    const hoje = new Date();
+    const yyyy = hoje.getFullYear();
+    const mm = String(hoje.getMonth()+1).padStart(2,'0');
+    const dd = String(hoje.getDate()).padStart(2,'0');
+    dataAgendamento.min = `${yyyy}-${mm}-${dd}`;
+    dataAgendamento.value = `${yyyy}-${mm}-${dd}`;
+    ouvirReservasDia(dataAgendamento.value);
 
     dataAgendamento.addEventListener('change', ()=>{
       const ds = dataAgendamento.value;
-      if(!ds){ renderSlots([]); return; }
-      const dow = diaSemana(ds);
-      if(!HORARIO.diasAtivos.includes(dow)){
-        unsubscribeReservas();
-        renderSlots([]);
-        return;
-      }
-      ouvirReservasDia(ds);
+      if(ds) ouvirReservasDia(ds);
     });
+  })();
 
-    btnConfirmarAgendamento.addEventListener('click', async ()=>{
-      const ds = dataAgendamento.value;
-      if(!ds){ alert('Selecione a data.'); return; }
-      if(!slotSelecionado){ alert('Selecione um horário.'); return; }
-      if(!nomeCliente.value.trim()){ alert('Informe seu nome.'); return; }
-      if(!telCliente.value.trim()){ alert('Informe seu telefone.'); return; }
-
-      try{
-        await confirmarReservaFirestore(ds, slotSelecionado, nomeCliente.value.trim(), telCliente.value.trim(), servicoAgendamento.value || null);
-        const servSel = SERVICOS.find(s=>s.id===servicoAgendamento.value);
-        alert(`Agendamento confirmado!
-Data: ${ds}
-Horário: ${slotSelecionado}
-Cliente: ${nomeCliente.value}
-Telefone: ${telCliente.value}
-Serviço: ${servSel ? servSel.nome : '(não informado)'}`);
-        slotSelecionado = null;
-        $$('.slot').forEach(s=>s.classList.remove('selected'));
-      }catch(e){
-        alert('Não foi possível reservar: ' + (e && e.message ? e.message : e));
-      }
-    });
-
-    // ====== Delegações / eventos globais ======
-    document.addEventListener('click', (e)=>{
-      const add = e.target.closest('[data-add]');
-      if(add){ addToCart(add.getAttribute('data-add')); }
-      const ag = e.target.closest('[data-agendar]');
-      if(ag){
-        document.getElementById('agendamento').scrollIntoView({behavior:'smooth'});
-        const id = ag.getAttribute('data-agendar');
-        servicoAgendamento.value = id;
-      }
-      const del = e.target.closest('[data-del]');
-      if(del){ removeFromCart(del.getAttribute('data-del')); }
-      const qty = e.target.closest('[data-qty]');
-      if(qty){
-        const [id,delta] = qty.getAttribute('data-qty').split('|');
-        changeQty(id, Number(delta));
-      }
-    });
-
-    // ====== Inicialização ======
-    (function init(){
-      document.getElementById('year').textContent = new Date().getFullYear();
-      renderServicos();
-      renderCart();
-      popularServicosAgendamento();
-
-      // Data mínima = hoje e já ouvir reservas de hoje
-      const hoje = new Date();
-      const yyyy = hoje.getFullYear();
-      const mm = String(hoje.getMonth()+1).padStart(2,'0');
-      const dd = String(hoje.getDate()).padStart(2,'0');
-      dataAgendamento.min = `${yyyy}-${mm}-${dd}`;
-      dataAgendamento.value = `${yyyy}-${mm}-${dd}`;
-      ouvirReservasDia(dataAgendamento.value);
-    })();
-
-    window.addEventListener('beforeunload', ()=>{ try{ unsubscribeReservas(); }catch{} });
-  </script>
+  // Cleanup listener ao sair
+  window.addEventListener('beforeunload', ()=>{ try{ if(unsubscribe) unsubscribe(); }catch{} });
+</script>
 </body>
 </html>
