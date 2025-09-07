@@ -1,69 +1,627 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Salão Elegance</title>
-<style>
-  :root{--bg:#0e0f12;--text:#e6e8eb;--soft:#16181d;--card:#1b1f26;--border:#2a2f3a}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-  header,footer{padding:12px 16px;background:var(--soft)}
-  main{padding:16px}
-  h2{margin:0 0 10px}
-  section{margin:18px 0}
-  .card{background:linear-gradient(180deg,#151922,#101319);border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0}
-  .price{font-weight:700}
-  .cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0;padding:10px;border:1px solid var(--border);border-radius:10px;background:#12141a}
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-  img{max-width:100%;display:block;border-radius:10px}
-  label{display:block;margin:10px 0 6px;color:#cdd3db}
-  input,select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#0f1116;color:var(--text);outline:none}
-  button{cursor:pointer;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:#1b2330;color:#dbe3ee}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media (max-width:800px){.grid{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salão Elegance</title>
+  <style>
+    :root {
+      --bg: #0e0f12;
+      --text: #e6e8eb;
+      --soft: #16181d;
+      --card: #1b1f26;
+      --border: #2a2f3a
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text)
+    }
+
+    header,
+    footer {
+      padding: 12px 16px;
+      background: var(--soft)
+    }
+
+    main {
+      padding: 16px
+    }
+
+    h2 {
+      margin: 0 0 10px
+    }
+
+    section {
+      margin: 18px 0
+    }
+
+    .card {
+      background: linear-gradient(180deg, #151922, #101319);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0
+    }
+
+    .price {
+      font-weight: 700
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #12141a
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 10px
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      color: #cdd3db
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0f1116;
+      color: var(--text);
+      outline: none
+    }
+
+    button {
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #1b2330;
+      color: #dbe3ee
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    @media (max-width:800px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+    /* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh; /* ocupa a tela toda */
+  background: url('https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Camada preta translúcida */
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+/* Título */
+.hero-overlay h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Subtítulo */
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+/* Botão */
+.btn-hero {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+}
+  </style>
 </head>
+
 <body>
-
-<header>
-  <h1>Salão Elegance</h1>
+  <header class="hero">
+  <div class="hero-overlay">
+    <h1>Salão Elegance</h1>
+    <p>Estilo e cuidado para o homem moderno</p>
+    <a href="#foto" class="btn-hero">Conheça nossos serviços</a>
+  </div>
 </header>
+<br>
+  <main>
+    <!-- Galeria -->
+     <!-- Coloque acima da sua seção .gallery -->
+<div id="foto" class="placa-galeria" role="note" aria-label="Instrução de uso">
+  <span class="placa-emoji"></span>
+  <span style="font-size: 30px;" class="placa-texto">SEJA BEM VINDO(A)</span>
+</div>
+<style>
+.placa-galeria {
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto 8px auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #ffffff;
+  text-align: center;
+}
 
-<main>
-  <!-- Galeria -->
-  <section id="galeria">
-    <h2>Galeria</h2>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop" alt="">
-      <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&w=900&auto=format&fit=crop" alt="">
-      <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=900&auto=format&fit=crop" alt="">
-      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=900&auto=format&fit=crop" alt="">
-    </div>
-  </section>
+.placa-emoji {
+  font-size: 1.25rem;
+}
 
-  <!-- Serviços -->
-  <section id="servicos">
-    <h2>Serviços</h2>
-    <div id="servicosGrid"></div>
-  </section>
+.placa-texto {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  font-size: 30px;
+  animation: piscarSombras 5s infinite alternate ease-in-out;
+  padding: 12px;
+  border-radius: 10px;
+}
 
-  <!-- Carrinho -->
-  <section id="carrinho">
-    <h2>Carrinho</h2>
-    <div id="cartItems"></div>
-    <div>Total: <span id="cartTotal">R$ 0,00</span></div>
-  </section>
+/* Animação única para text-shadow e box-shadow */
+@keyframes piscarSombras {
+  0% {
+    text-shadow: 0 0 5px red, 0 0 10px red;
+    box-shadow: 0 0 10px red, 0 0 20px red;
+  }
+  50% {
+    text-shadow: 0 0 5px black, 0 0 10px black;
+    box-shadow: 0 0 10px black, 0 0 20px black;
+  }
+  100% {
+    text-shadow: 0 0 5px red, 0 0 10px red;
+    box-shadow: 0 0 10px red, 0 0 20px red;
+  }
+}
 
-  <!-- Agendamento -->
-  <section id="agendamento">
-    <h2>Agendamento online</h2>
-    <div class="grid">
-      <div>
+/* Compacta no smartphone */
+@media (max-width: 600px) {
+  .placa-galeria {
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+  }
+  .placa-emoji { font-size: 1.1rem; }
+  .placa-texto { font-size: 0.95rem; }
+}
+
+</style><br>
+    <section id="galeria">
+      <a href="#serv">
+        <div class="gallery">
+          <img
+            src="https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ydGUlMjBkZSUyMGNhYmVsb3xlbnwwfHwwfHx8MA%3D%3D"
+            alt="">
+          <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&w=900&auto=format&fit=crop"
+            alt="">
+          <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y29ydGUlMjBkZSUyMGNhYmVsb3xlbnwwfHwwfHx8MA%3D%3D"
+            alt="">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=900&auto=format&fit=crop"
+            alt="">
+        </div>
+      </a>
+    </section>
+<style>
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* sempre 2 imagens por linha */
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Imagens */
+.gallery img {
+  width: 100%;
+  height: 180px; /* altura padrão */
+  object-fit: cover;
+  border-radius: 16px; /* bordas mais arredondadas */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* sombra suave fixa */
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: var(--delay, 0s);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Efeito ao passar o mouse */
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18); /* sombra mais intensa no hover */
+}
+
+/* Animação de entrada */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 600px) {
+  .gallery img {
+    height: 150px; /* reduz altura no celular */
+  }
+}
+</style>
+<script>
+  document.querySelectorAll('.gallery img').forEach((img, i) => {
+    img.style.setProperty('--delay', `${i * 0.5}s`);
+  });
+</script>
+    <style>
+      :root {
+        --primary: #ff6600;
+        --primary-700: #e65c00;
+        --ok: #4caf50;
+        --warn: #ff9800;
+        --err: #e53935;
+        --bg: #121212;
+        --card: #1e1e1e;
+        --text: #ffffff;
+        --muted: #aaaaaa;
+        --line: #333;
+      }
+
+      * {
+        box-sizing: border-box
+      }
+
+      h1 {
+        margin: 10px 0;
+        font-size: 22px;
+      }
+
+      /* Grid de serviços */
+      #servicosGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        padding: 16px;
+        max-width: 1080px;
+        margin: 0 auto 80px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 8px;
+        padding: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--line);
+      }
+
+      .card .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .card .price {
+        font-weight: 700;
+      }
+
+      .card button {
+        margin-top: 10px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      .card button:hover {
+        background: var(--primary-700);
+      }
+
+      /* Botão flutuante */
+      .btn-carrinho {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1100;
+      }
+
+      .btn-carrinho:hover {
+        background: var(--primary-700);
+      }
+
+      /* Overlay com blur */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s ease;
+        z-index: 900;
+      }
+
+      .overlay.ativo {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      /* Carrinho lateral */
+      .carrinho-lateral {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 380px;
+        max-width: 92vw;
+        height: 100%;
+        background: var(--card);
+        box-shadow: -2px 0 12px rgba(0, 0, 0, 0.5);
+        padding: 18px;
+        overflow-y: auto;
+        transition: right .3s ease;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-left: 1px solid var(--line);
+      }
+
+      .carrinho-lateral.ativo {
+        right: 0;
+      }
+
+      .carrinho-lateral h2 {
+        margin: 4px 0 8px;
+        font-size: 18px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line);
+        color: #fff;
+      }
+
+      /* Lista do carrinho */
+      #cartItems {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #cartItems.scroll {
+        max-height: 150px;
+        overflow-y: auto;
+      }
+
+      .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: #202020;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 8px;
+      }
+
+      .cart-item .name {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .cart-item .sub {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .cart-item .actions {
+        display: flex;
+        gap: 6px;
+      }
+
+      .cart-item .actions button {
+        padding: 4px 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background: #444;
+        color: #fff;
+      }
+
+      .cart-item .actions button:hover {
+        background: #555;
+      }
+
+      .cart-total {
+        margin-top: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700;
+        background: #191919;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 10px 12px;
+      }
+
+      /* Formulário */
+      #agendamento label {
+        font-weight: 700;
+        margin-top: 8px;
+        display: block;
+      }
+
+      #agendamento input,
+      #agendamento select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #555;
+        border-radius: 6px;
+        background: #2a2a2a;
+        color: #fff;
+      }
+
+      #confirmarAgendamento {
+        width: 100%;
+        margin-top: 14px;
+        padding: 12px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      #confirmarAgendamento:hover {
+        background: var(--primary-700);
+      }
+
+      /* Aviso animado */
+      .aviso {
+        position: fixed;
+        top: 20px;
+        right: -420px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--ok);
+        color: #fff;
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transition: all .5s ease;
+        z-index: 1200;
+        font-weight: 700;
+      }
+
+      .aviso.ativo {
+        right: 20px;
+        opacity: 1;
+      }
+
+      .aviso.info {
+        background: #2196f3;
+      }
+
+      .aviso.warn {
+        background: var(--warn);
+      }
+
+      .aviso.err {
+        background: var(--err);
+      }
+
+    </style>
+    </head>
+    <main>
+      <div id="servicosGrid"></div>
+    </main>
+    <!-- Botão flutuante -->
+    <button id="btnCarrinho" class="btn-carrinho" aria-label="Abrir carrinho">🛒</button>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <!-- Carrinho lateral -->
+    <aside id="carrinhoLateral" class="carrinho-lateral" aria-label="Carrinho e agendamento">
+      <h2 style="text-align: center;">Seu carrinho</h2>
+      <div id="cartItems"></div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">R$ 0,00</span>
+      </div>
+
+      <h2 style="text-align: center;">Agendamento</h2>
+      <section id="agendamento">
         <label>Data</label>
         <input type="date" id="dataAgendamento" required />
-      </div>
-      <div>
+
         <label>Horário</label>
         <select id="horarioAgendamento" required>
           <option value="">— Selecione —</option>
@@ -74,231 +632,465 @@
           <option value="14:00">14:00</option>
           <option value="15:00">15:00</option>
         </select>
-      </div>
-      <div>
+
         <label>Seu nome</label>
         <input id="nomeCliente" placeholder="Nome do cliente" required />
-      </div>
-      <div>
+
         <label>Telefone (WhatsApp)</label>
         <input id="telCliente" placeholder="(99) 9 9999-9999" inputmode="tel" required />
-      </div>
+
+        <button id="confirmarAgendamento">Confirmar agendamento</button>
+      </section>
+    </aside>
+
+    <!-- Aviso -->
+    <div id="aviso" class="aviso"><span id="avisoMsg">Ação realizada</span></div>
+
+    <footer class="footer-elegante">
+  <div class="footer-conteudo">
+    <p>© <span id="year"></span> Salão Elegance — Todos os direitos reservados</p>
+    
+    <div class="footer-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#contato">Contato</a>
     </div>
-    <div style="margin-top:14px">
-      <button id="confirmarAgendamento">Confirmar agendamento</button>
+
+    <div class="footer-redes">
+      <a href="https://instagram.com/seuusuario" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://wa.me/5599999999999" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://facebook.com/seuusuario" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
     </div>
-  </section>
-</main>
+  </div>
+</footer>
 
-<footer>© <span id="year"></span> Salão Elegance</footer>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
-<!-- Firebase modular -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-  import {
-    getFirestore, doc, onSnapshot, runTransaction,
-    collection, addDoc, serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+<!-- Link para os ícones do Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  // Configuração do Firebase (seus dados)
-  const firebaseConfig = {
-    apiKey: "AIzaSyBHBcJHtU_o8tjsJCSoCsO665M3N72mF8g",
-    authDomain: "meusiteaki2025.firebaseapp.com",
-    projectId: "meusiteaki2025",
-    storageBucket: "meusiteaki2025.firebasestorage.app",
-    messagingSenderId: "1059720978927",
-    appId: "1:1059720978927:web:c4e5fde24aa95672d0161a",
-    measurementId: "G-KD8EDDRLWZ"
-  };
+<style>
+  
+.footer-elegante {
+  background: linear-gradient(135deg, #4f46e5, #6d28d9);
+  color: #fff;
+  padding: 20px 10px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+  border-radius: 10px;
+}
 
-  // Inicialização
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+.footer-conteudo {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  // Helpers
-  const fmtBRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-  const $ = s => document.querySelector(s);
+.footer-conteudo p {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
 
-  // Serviços
-  const SERVICOS = [
-    { id:'corte', nome:'Corte', preco:30.00 },
-    { id:'lavagem', nome:'Lavagem de Cabelo', preco:50.00 },
-    { id:'alongamento', nome:'Alongamento', preco:20.50 },
-    { id:'selagem', nome:'Selagem', preco:200.00 }
-  ];
-  const servicosGrid = $('#servicosGrid');
-  function renderServicos(){
-    servicosGrid.innerHTML = '';
-    SERVICOS.forEach(s=>{
-      const div = document.createElement('div');
-      div.className = 'card';
-      div.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+.footer-links {
+  margin-top: 8px;
+}
+
+.footer-links a {
+  color: #f3f4f6;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ffd700;
+}
+
+.footer-redes {
+  margin-top: 12px;
+}
+
+.footer-redes a {
+  color: #f3f4f6;
+  margin: 0 8px;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-redes a:hover {
+  color: #ffd700;
+  transform: scale(1.2);
+}
+
+.footer-elegante p, .footer-links a {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 600px) {
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+</style>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+    <script type="module">
+      // Firebase modular
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+      import {
+        getFirestore, doc, onSnapshot, runTransaction, collection, addDoc, serverTimestamp
+      } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+      // Configuração do Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyBHBcJHtU_o8tjsJCSoCsO665M3N72mF8g",
+        authDomain: "meusiteaki2025.firebaseapp.com",
+        projectId: "meusiteaki2025",
+        storageBucket: "meusiteaki2025.firebasestorage.app",
+        messagingSenderId: "1059720978927",
+        appId: "1:1059720978927:web:c4e5fde24aa95672d0161a",
+        measurementId: "G-KD8EDDRLWZ"
+      };
+
+      // Inicialização
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Helpers
+      const fmtBRL = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const $ = s => document.querySelector(s);
+
+      // Serviços
+      const SERVICOS = [
+        { id: 'corte', nome: 'Corte', preco: 20.00 },
+        { id: 'barba', nome: 'Barba', preco: 8.00 },
+        { id: 'lavagem', nome: 'Lavagem de Cabelo', preco: 30.00 },
+        { id: 'alongamento', nome: 'Alongamento', preco: 20.50 },
+        { id: 'selagem', nome: 'Selagem', preco: 100.00 }
+      ];
+
+      // Render serviços
+      const servicosGrid = $('#servicosGrid');
+      function renderServicos() {
+        if (!servicosGrid) return;
+        servicosGrid.innerHTML = '';
+        SERVICOS.forEach(s => {
+          const div = document.createElement('div');
+          div.className = 'card';
+          div.innerHTML = `
+        <div class="top">
           <div><strong>${s.nome}</strong></div>
           <div class="price">${fmtBRL(s.preco)}</div>
         </div>
-        <div style="margin-top:8px">
-          <button data-add="${s.id}">Adicionar</button>
-        </div>
+        <button data-add="${s.id}" aria-label="Adicionar ${s.nome}">Adicionar</button>
       `;
-      servicosGrid.appendChild(div);
-    });
-  }
-
-  // Carrinho
-  let cart = [];
-  const cartItemsEl = $('#cartItems');
-  const cartTotalEl = $('#cartTotal');
-
-  function renderCart(){
-    cartItemsEl.innerHTML = '';
-    cart.forEach(i=>{
-      const row = document.createElement('div');
-      row.className = 'cart-item';
-      row.innerHTML = `
-        <div>${i.nome} x${i.qtd} — ${fmtBRL(i.preco*i.qtd)}</div>
-        <div style="display:flex;gap:6px">
-          <button data-qty="${i.id}|-1">–</button>
-          <button data-qty="${i.id}|1">+</button>
-          <button data-del="${i.id}">Remover</button>
-        </div>
-      `;
-      cartItemsEl.appendChild(row);
-    });
-    const total = cart.reduce((t,i)=>t+i.preco*i.qtd,0);
-    cartTotalEl.textContent = fmtBRL(total);
-  }
-  function addToCart(id){
-    const item = cart.find(x=>x.id===id);
-    if(item) item.qtd++;
-    else{
-      const s = SERVICOS.find(x=>x.id===id);
-      cart.push({ id:s.id, nome:s.nome, preco:s.preco, qtd:1 });
-    }
-    renderCart();
-  }
-  function changeQty(id, delta){
-    const it = cart.find(x=>x.id===id);
-    if(!it) return;
-    it.qtd += delta;
-    if(it.qtd<=0) cart = cart.filter(x=>x.id!==id);
-    renderCart();
-  }
-  function removeFromCart(id){
-    cart = cart.filter(x=>x.id!==id);
-    renderCart();
-  }
-
-  // Delegação global de cliques (serviços/carrinho)
-  document.addEventListener('click', (e)=>{
-    const add = e.target.closest('[data-add]');
-    if(add){ addToCart(add.getAttribute('data-add')); }
-    const del = e.target.closest('[data-del]');
-    if(del){ removeFromCart(del.getAttribute('data-del')); }
-    const qty = e.target.closest('[data-qty]');
-    if(qty){
-      const [id,delta] = qty.getAttribute('data-qty').split('|');
-      changeQty(id, Number(delta));
-    }
-  });
-
-  // Agendamento
-  const dataAgendamento = $('#dataAgendamento');
-  const horarioAgendamento = $('#horarioAgendamento');
-  const nomeCliente = $('#nomeCliente');
-  const telCliente = $('#telCliente');
-  const btnConfirmar = $('#confirmarAgendamento');
-
-  let unsubscribe = null;
-
-  // Ouve horários reservados da data e desabilita no select
-  function ouvirReservasDia(ds){
-    if(unsubscribe) unsubscribe();
-    unsubscribe = onSnapshot(doc(db,'reservas',ds),(snap)=>{
-      const indisponiveis = snap.exists() ? (snap.data().horarios || []) : [];
-      // reset
-      Array.from(horarioAgendamento.options).forEach(opt=>{
-        if(opt.value) opt.disabled = false;
-      });
-      // bloqueia reservados
-      indisponiveis.forEach(h=>{
-        const opt = Array.from(horarioAgendamento.options).find(o=>o.value===h);
-        if(opt) opt.disabled = true;
-      });
-      // se o selecionado ficou inválido, limpa
-      if(horarioAgendamento.value && horarioAgendamento.selectedOptions[0]?.disabled){
-        horarioAgendamento.value = '';
+          servicosGrid.appendChild(div);
+        });
       }
-    });
-  }
 
-  // Confirmação: bloqueia horário + registra agendamento + WhatsApp
-  btnConfirmar.addEventListener('click', async ()=>{
-    const ds = dataAgendamento.value;
-    const hora = horarioAgendamento.value;
-    const nome = nomeCliente.value.trim();
-    const telefone = telCliente.value.trim();
+      // Carrinho
+      let cart = [];
+      const cartItemsEl = $('#cartItems');
+      const cartTotalEl = $('#cartTotal');
 
-    if(!ds || !hora || !nome || !telefone){
-      alert('Preencha todos os campos');
-      return;
-    }
+      function renderCart() {
+        cartItemsEl.innerHTML = '';
+        if (cart.length === 0) {
+          const vazio = document.createElement('div');
+          vazio.style.color = '#aaa';
+          vazio.textContent = 'Seu carrinho está vazio.';
+          cartItemsEl.appendChild(vazio);
+        } else {
+          cart.forEach(i => {
+            const row = document.createElement('div');
+            row.className = 'cart-item';
+            row.innerHTML = `
+          <div class="name">
+            <div>${i.nome} x${i.qtd}</div>
+            <div class="sub">${fmtBRL(i.preco)} cada</div>
+          </div>
+          <div class="actions">
+            <button data-qty="${i.id}|-1" aria-label="Diminuir ${i.nome}">–</button>
+            <button data-qty="${i.id}|1" aria-label="Aumentar ${i.nome}">+</button>
+            <button data-del="${i.id}" aria-label="Remover ${i.nome}">Remover</button>
+          </div>
+        `;
+            cartItemsEl.appendChild(row);
+          });
+        }
+        const total = cart.reduce((t, i) => t + i.preco * i.qtd, 0);
+        cartTotalEl.textContent = fmtBRL(total);
 
-    try {
-      // 1) Bloquear horário na data (reservas/{YYYY-MM-DD}.horarios[])
-      const refReserva = doc(db,'reservas',ds);
-      await runTransaction(db, async (t)=>{
-        const snap = await t.get(refReserva);
-        let horarios = snap.exists() ? (snap.data().horarios || []) : [];
-        if(horarios.includes(hora)) throw new Error('Horário já reservado');
-        horarios.push(hora);
-        t.set(refReserva, { horarios }, { merge:true });
+        // Rolagem automática a partir de 2 itens
+        if (cart.length >= 2) {
+          cartItemsEl.classList.add('scroll');
+          cartItemsEl.scrollTop = cartItemsEl.scrollHeight;
+        } else {
+          cartItemsEl.classList.remove('scroll');
+          cartItemsEl.scrollTop = 0;
+        }
+      }
+
+      function addToCart(id) {
+        const item = cart.find(x => x.id === id);
+        if (item) item.qtd++;
+        else {
+          const s = SERVICOS.find(x => x.id === id);
+          if (!s) return;
+          cart.push({ id: s.id, nome: s.nome, preco: s.preco, qtd: 1 });
+        }
+        renderCart();
+      }
+      function changeQty(id, delta) {
+        const it = cart.find(x => x.id === id);
+        if (!it) return;
+        it.qtd += delta;
+        if (it.qtd <= 0) cart = cart.filter(x => x.id !== id);
+        renderCart();
+      }
+      function removeFromCart(id) {
+        cart = cart.filter(x => x.id !== id);
+        renderCart();
+      }
+
+      // Aviso estilizado
+      const avisoEl = $('#aviso');
+      const avisoMsgEl = $('#avisoMsg');
+      let avisoTimer = null;
+      function mostrarAviso(msg, tipo = 'info') {
+        avisoMsgEl.textContent = msg;
+        avisoEl.className = 'aviso';
+        if (tipo === 'info') avisoEl.classList.add('info');
+        if (tipo === 'warn') avisoEl.classList.add('warn');
+        if (tipo === 'err') avisoEl.classList.add('err');
+        // tipo 'ok' usa a cor padrão (verde)
+        avisoEl.classList.add('ativo');
+        clearTimeout(avisoTimer);
+        avisoTimer = setTimeout(() => avisoEl.classList.remove('ativo'), 2200);
+      }
+
+      // Delegação global de cliques (serviços/carrinho)
+      document.addEventListener('click', (e) => {
+        const add = e.target.closest('[data-add]');
+        if (add) {
+          addToCart(add.getAttribute('data-add'));
+          mostrarAviso('✅ Adicionado ao carrinho!', 'info');
+          return;
+        }
+        const del = e.target.closest('[data-del]');
+        if (del) {
+          removeFromCart(del.getAttribute('data-del'));
+          mostrarAviso('Item removido.', 'warn');
+          return;
+        }
+        const qty = e.target.closest('[data-qty]');
+        if (qty) {
+          const [id, delta] = qty.getAttribute('data-qty').split('|');
+          changeQty(id, Number(delta));
+          return;
+        }
       });
 
-      // 2) Registrar agendamento (agendamentos)
-      await addDoc(collection(db,'agendamentos'), {
-        data: ds,
-        hora: hora,
-        nome: nome,
-        telefone: telefone,
-        status: 'Pendente',
-        criadoEm: serverTimestamp()
+      // Carrinho lateral + overlay
+      const btnCarrinho = $('#btnCarrinho');
+      const carrinhoLateral = $('#carrinhoLateral');
+      const overlay = $('#overlay');
+
+      function abrirCarrinho() {
+        carrinhoLateral.classList.add('ativo');
+        overlay.classList.add('ativo');
+      }
+      function fecharCarrinho() {
+        carrinhoLateral.classList.remove('ativo');
+        overlay.classList.remove('ativo');
+      }
+
+      btnCarrinho.addEventListener('click', () => {
+        if (carrinhoLateral.classList.contains('ativo')) fecharCarrinho();
+        else abrirCarrinho();
+      });
+      overlay.addEventListener('click', fecharCarrinho);
+
+      // Agendamento
+      const dataAgendamento = $('#dataAgendamento');
+      const horarioAgendamento = $('#horarioAgendamento');
+      const nomeCliente = $('#nomeCliente');
+      const telCliente = $('#telCliente');
+      const btnConfirmar = $('#confirmarAgendamento');
+
+      // Data mínima = hoje
+      function hojeISO() {
+        const d = new Date();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${d.getFullYear()}-${m}-${day}`;
+      }
+      dataAgendamento.min = hojeISO();
+
+      // Ouvir reservas do dia
+      let unsubscribe = null;
+      function ouvirReservasDia(ds) {
+        if (unsubscribe) unsubscribe();
+        unsubscribe = onSnapshot(doc(db, 'reservas', ds), (snap) => {
+          const indisponiveis = snap.exists() ? (snap.data().horarios || []) : [];
+          Array.from(horarioAgendamento.options).forEach(opt => {
+            if (opt.value) opt.disabled = false;
+          });
+          indisponiveis.forEach(h => {
+            const opt = Array.from(horarioAgendamento.options).find(o => o.value === h);
+            if (opt) opt.disabled = true;
+          });
+          if (horarioAgendamento.value && horarioAgendamento.selectedOptions[0]?.disabled) {
+            horarioAgendamento.value = '';
+          }
+        });
+      }
+
+      dataAgendamento.addEventListener('change', () => {
+        const ds = dataAgendamento.value; // yyyy-mm-dd
+        if (ds) ouvirReservasDia(ds);
       });
 
-      // 3) WhatsApp
-      const numeroLimpo = telefone.replace(/\D/g,'');
-      const msg = `Olá ${nome}, seu agendamento foi confirmado para ${ds} às ${hora}.`;
-      window.open(`https://wa.me/55${numeroLimpo}?text=${encodeURIComponent(msg)}`,'_blank');
+      // Confirmar agendamento: bloqueia horário + registra agendamento + WhatsApp (unificado)
+      btnConfirmar.addEventListener('click', async () => {
+        try {
+          const ds = dataAgendamento.value?.trim();
+          const h = horarioAgendamento.value?.trim();
+          const nome = nomeCliente.value?.trim();
+          const tel = telCliente.value?.trim();
+          const total = cart.reduce((t, i) => t + i.preco * i.qtd, 0);
 
-      alert('Agendamento confirmado!');
-      horarioAgendamento.value = '';
-    } catch(e) {
-      alert('Não foi possível reservar: ' + (e?.message || e));
-    }
-  });
+          if (!ds || !h || !nome || !tel) {
+            mostrarAviso('Preencha todos os campos.', 'warn');
+            return;
+          }
+          if (cart.length === 0) {
+            mostrarAviso('Seu carrinho está vazio.', 'warn');
+            return;
+          }
 
-  // Inicialização de UI
-  (function init(){
-    document.getElementById('year').textContent = new Date().getFullYear();
-    renderServicos();
-    renderCart();
+          // 1) Transação para bloquear horário
+          const ref = doc(db, 'reservas', ds);
+          await runTransaction(db, async (tx) => {
+            const snap = await tx.get(ref);
+            let horarios = [];
+            if (snap.exists()) {
+              horarios = Array.isArray(snap.data().horarios) ? snap.data().horarios : [];
+            }
+            if (horarios.includes(h)) {
+              throw new Error('INDISPONIVEL');
+            }
+            horarios.push(h);
+            tx.set(ref, { horarios }, { merge: true });
+          });
 
-    const hoje = new Date();
-    const yyyy = hoje.getFullYear();
-    const mm = String(hoje.getMonth()+1).padStart(2,'0');
-    const dd = String(hoje.getDate()).padStart(2,'0');
-    dataAgendamento.min = `${yyyy}-${mm}-${dd}`;
-    dataAgendamento.value = `${yyyy}-${mm}-${dd}`;
-    ouvirReservasDia(dataAgendamento.value);
+          // 2) Persistir agendamento com itens
+          const itens = cart.map(i => ({ id: i.id, nome: i.nome, qtd: i.qtd, preco: i.preco }));
+          await addDoc(collection(db, 'agendamentos'), {
+            data: ds,
+            horario: h,
+            nome,
+            telefone: tel,
+            itens,
+            total,
+            status: 'pendente',
+            criadoEm: serverTimestamp()
+          });
 
-    dataAgendamento.addEventListener('change', ()=>{
-      const ds = dataAgendamento.value;
-      if(ds) ouvirReservasDia(ds);
-    });
-  })();
+          // 3) Montar mensagem WhatsApp com os serviços escolhidos
+          let mensagem = `*Novo agendamento:*\n`;
+          mensagem += `👤 Cliente: ${nome}\n`;
+          mensagem += `📅 Data: ${ds.split('-').reverse().join('/')}\n`;
+          mensagem += `⏰ Horário: ${h}\n\n`;
+          mensagem += `*Serviços:*\n`;
+          cart.forEach(item => {
+            mensagem += `• ${item.nome} x${item.qtd} (${fmtBRL(item.preco)} cada)\n`;
+          });
+          mensagem += `\n💰 Total: ${fmtBRL(total)}`;
 
-  // Cleanup listener ao sair
-  window.addEventListener('beforeunload', ()=>{ try{ if(unsubscribe) unsubscribe(); }catch{} });
-</script>
+          // 4) Abrir WhatsApp (número do salão)
+          const numeroSalao = '5599992247544'; // substitua pelo número do salão (DDI+DDD+Número, sem espaços)
+          const url = `https://wa.me/${numeroSalao}?text=${encodeURIComponent(mensagem)}`;
+          window.open(url, '_blank');
+
+          mostrarAviso('✅ Agendamento Enviado!', 'ok');
+
+          // 5) Reset UI
+          cart = [];
+          renderCart();
+          dataAgendamento.value = '';
+          horarioAgendamento.value = '';
+          nomeCliente.value = '';
+          telCliente.value = '';
+          fecharCarrinho();
+
+        } catch (err) {
+          if (err?.message === 'INDISPONIVEL') {
+            mostrarAviso('Horário ficou indisponível. Escolha outro.', 'err');
+          } else {
+            console.error(err);
+            mostrarAviso('Erro ao confirmar. Tente novamente.', 'err');
+          }
+        }
+      });
+
+      // Rodapé
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Inicialização de UI
+      (function init() {
+        document.getElementById('year').textContent = new Date().getFullYear();
+        renderServicos();
+        renderCart();
+
+        // Define data min e seleciona hoje
+        const hoje = new Date();
+        const yyyy = hoje.getFullYear();
+        const mm = String(hoje.getMonth() + 1).padStart(2, '0');
+        const dd = String(hoje.getDate()).padStart(2, '0');
+        dataAgendamento.min = `${yyyy}-${mm}-${dd}`;
+        dataAgendamento.value = `${yyyy}-${mm}-${dd}`;
+        ouvirReservasDia(dataAgendamento.value);
+      })();
+
+       document.addEventListener('keydown', function (event) {
+                if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                    event.preventDefault();
+                }
+            });
+
+            document.addEventListener('contextmenu', function (event) {
+                event.preventDefault();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                    e.preventDefault();
+                }
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                }
+            });
+
+      // Cleanup listener ao sair
+      window.addEventListener('beforeunload', () => { try { if (unsubscribe) unsubscribe(); } catch { } });
+    </script>
+
+    </script>
 </body>
+
 </html>
